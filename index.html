@@ -4,42 +4,39 @@
 <meta charset="utf-8">
 <title>DHA PROW Map</title>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leafletp {
+<link rel="stylesheet" href="https://unpkg.com/leaflet@e>
+html, body, #map {
     height: 100%;
     margin: 0;
     padding: 0;
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div id="map"></div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/distript>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leafletscript>
 
-<script>
+const map = L.map('map').setView([51.3, 0.6], 10);
 
-var map = L.map('map').setView([51.3, 0.6], 10);
-
-var carto = L.tileLayer(
+const carto = L.tileLayer(
 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
 {
     attribution:'© OpenStreetMap © CARTO'
 }
-);
+).addTo(map);
 
-var satellite = L.tileLayer(
+const satellite = L.tileLayer(
 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
 {
-    attribution:'Esri'
+    attribution:'© Esri'
 }
 );
 
-carto.addTo(map);
-
 fetch('KentPROW20GEOJSON.geojson')
-.then(response => response.json())
+.then(r => r.json())
 .then(data => {
     L.geoJSON(data,{
         style:{
@@ -50,7 +47,7 @@ fetch('KentPROW20GEOJSON.geojson')
 });
 
 fetch('PROWS20mGEOJSON.geojson')
-.then(response => response.json())
+.then(r => r.json())
 .then(data => {
     L.geoJSON(data,{
         style:{
