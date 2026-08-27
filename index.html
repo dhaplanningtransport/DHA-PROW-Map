@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
 <title>DHA PROW Map</title>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leafletp {
     height: 100%;
     margin: 0;
+    padding: 0;
 }
 </style>
-
 </head>
 
 <body>
 
 <div id="map"></div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaf
+<script src="https://unpkg.com/leaflet@1.9.4/distript>
 
 <script>
 
@@ -24,21 +25,23 @@ var map = L.map('map').setView([51.3, 0.6], 10);
 var carto = L.tileLayer(
 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
 {
-    attribution: '&copy; OpenStreetMap & CARTO'
-});
+    attribution:'© OpenStreetMap © CARTO'
+}
+);
 
 var satellite = L.tileLayer(
 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
 {
-    attribution: 'Esri'
-});
+    attribution:'Esri'
+}
+);
 
 carto.addTo(map);
 
 fetch('KentPROW20GEOJSON.geojson')
-.then(r => r.json())
+.then(response => response.json())
 .then(data => {
-    var kent = L.geoJSON(data,{
+    L.geoJSON(data,{
         style:{
             color:'red',
             weight:2
@@ -47,9 +50,9 @@ fetch('KentPROW20GEOJSON.geojson')
 });
 
 fetch('PROWS20mGEOJSON.geojson')
-.then(r => r.json())
+.then(response => response.json())
 .then(data => {
-    var medway = L.geoJSON(data,{
+    L.geoJSON(data,{
         style:{
             color:'blue',
             weight:3
